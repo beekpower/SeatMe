@@ -1,8 +1,6 @@
 angular.module('controllers', [])
 .controller('test', function($scope, Genetic) {
-  var people = ['Nick', 'Zach', 'Tyler'];
-
-  var ratings = { Nick: { Zach: 2, Tyler: 2 }};
-
-  
+  var people = [{ name: "Nick", ratings: { Zach: 2, Tyler: 2 } },
+                { name: "Zach", ratings: {} },
+                { name: "Tyler", ratings: {} }];
 });
