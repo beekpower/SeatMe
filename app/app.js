@@ -1,1 +1,1 @@
-var SeatMe = angular.module("seatMe", []);
+var SeatMe = angular.module("seatMe", ['services']);
