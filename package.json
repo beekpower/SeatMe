@@ -1,0 +1,18 @@
+{
+  "name": "SeatMe",
+  "version": "0.0.0",
+  "description": "Genetic Algorithm to figure out seating with friends",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fastnick94/SeatMe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fastnick94/SeatMe/issues"
+  }
+}
