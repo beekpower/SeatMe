@@ -14,5 +14,8 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/fastnick94/SeatMe/issues"
+  },
+  "devDependencies": {
+
   }
 }
