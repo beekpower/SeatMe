@@ -6,7 +6,7 @@
     <!--Bower Components-->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/material-design-lite/material.js"></script>
+    <script src="bower_components/material-design-lite/material.min.js"></script>
 
     <!--Bower CSS-->
     <link rel="stylesheet" href="bower_components/material-design-lite/material.css">
@@ -21,7 +21,10 @@
 
   </head>
   <body ng-app="seatMe">
-    <div ng-controller="test"></div>
-
+        <div class="mdl-layout__container">
+            <div class="mdl-layout__content">
+                <div ng-view class=""></div>
+            </div>
+        </div>
   </body>
 </html>

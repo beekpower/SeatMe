@@ -1,0 +1,49 @@
+<h1>MAP RELATIONSHITS</h1>
+    <p>I hate css</p>
+    <p>like WTF</p>
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-card mdl-cell--12-col">
+        <form action="#">
+            <div class="mdl-cell mdl-cell--4-col">
+                <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" ng-model="newMember" id="newMember">
+                <label class="mdl-textfield__label" for="newMember">Name</label>
+             </div>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col">
+                <button ng-click="addMember()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                    <i class="material-icons">+</i>
+                </button>
+            </div>
+        </form>
+        <form action="#">
+            <select ng-model="data.leftMember">
+                <option ng-repeat="member in group" value="{{member.name}}"  ng-show="member.name !== data.rightMember">{{member.name}}</option>
+            </select>
+            &nbsp; is &nbsp; 
+            <select ng-model="data.relationship">
+                <option ng-repeat="(relation, value) in relationships" value="{{relation}}">{{relation}}</option>
+            </select>
+            &nbsp;  with &nbsp; 
+            <select ng-model="data.rightMember">
+                <option ng-repeat="member in group" value="{{member.name}}" ng-show="member.name !== data.leftMember">{{member.name}}</option>
+            </select>
+             <div class="mdl-cell mdl-cell--4-col">
+                <button ng-click="setRelation()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                    <i class="material-icons">+</i>
+                </button>
+            </div>
+        </form>
+    </div>
+    <ul class="mdl-list" ng-repeat="member in group">
+    <li class="mdl-list__item">
+        <div class="mdl-list__item-primary-content">
+            <p><b>{{member.name}}</b></p>&nbsp;<br><br>
+            <span ng-repeat="(key, value) in member.relations">
+                <p>is {{value}} with {{key}}, &nbsp; </p>
+            </span>
+        </div>
+        
+      </li> 
+  </ul>
+</div>
