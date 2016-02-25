@@ -4,7 +4,7 @@ angular.module('controllers', [])
                 { name: "Zach", ratings: {} },
                 { name: "Tyler", ratings: {} }];
 }).controller("groupSelect", function ($scope, GroupMember, Relationships)
-{   
+{
     $scope.group = [];
     $scope.newMember = '';
     $scope.data = {
@@ -13,7 +13,7 @@ angular.module('controllers', [])
         relationship: ""
     };
     $scope.relationships = Relationships;
-    
+
     $scope.setRelation = function ()
     {
         for (var i = 0; i < $scope.group.length; i++)
@@ -24,7 +24,7 @@ angular.module('controllers', [])
                 $scope.group[i].addRelation($scope.data.relationship, $scope.data.leftMember);
         }
     };
-    
+
     $scope.addMember = function ()
     {
         var newMember = new GroupMember($scope.newMember);
@@ -37,8 +37,17 @@ angular.module('controllers', [])
         $scope.group.push(newMember);
         $scope.newMember = '';
     };
-    
-}).controller("geneticAlgorithm", function ($scope)
-{
 
+}).controller("geneticAlgorithm", function ($scope) {
+
+}).controller("peopleController", function ($scope) {
+  $scope.people = [];
+  $scope.add = function(name) {
+    $scope.name = "";
+    $scope.people.push(name);
+  }
+
+  $scope.remove = function(index) {
+    $scope.people.splice(index, 1);
+  }
 });

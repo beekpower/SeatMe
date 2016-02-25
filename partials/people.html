@@ -1,0 +1,54 @@
+<style>
+.demo-list-control {
+  width: 300px;
+}
+
+.demo-list-radio {
+  display: inline;
+}
+
+
+
+
+.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+    cursor: move;
+}
+.link {
+  stroke: #999;
+  stroke-width: 3px;
+  stroke-opacity: 1;
+}
+.label {
+    fill: white;
+    font-family: Verdana;
+    font-size: 25px;
+    text-anchor: middle;
+    cursor: move;
+}
+</style>
+
+
+<div class="mdl-textfield mdl-js-textfield">
+  <input ng-model="name" class="mdl-textfield__input" type="text" id="sample1">
+  <label class="mdl-textfield__label" for="sample1">Name</label>
+</div>
+
+<button ng-click="add(name)" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+  Add
+</button>
+
+<ul class="demo-list-control mdl-list">
+  <li ng-repeat="person in people track by $index" class="mdl-list__item">
+    <span class="mdl-list__item-primary-content">
+      <i class="material-icons  mdl-list__item-avatar">person</i>
+      {{person}}
+    </span>
+    <span class="mdl-list__item-secondary-action">
+      <button ng-click="remove($index)" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+        <i class="material-icons">clear</i>
+      </button>
+    </span>
+  </li>
+</ul>
