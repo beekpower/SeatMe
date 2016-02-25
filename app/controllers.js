@@ -1,8 +1,38 @@
 angular.module('controllers', [])
 .controller('test', function($scope, Genetic) {
-  var people = [{ name: "Nick", ratings: { Zach: 2, Tyler: 2 } },
-                { name: "Zach", ratings: {} },
-                { name: "Tyler", ratings: {} }];
+  var people = ["Nick", "Tyler", "Zach"];
+
+  var relationships = [
+    { source: "Nick", target: "Tyler", relation: 2},
+    { source: "Nick", target: "Zach", relation: 2}
+  ];
+
+  var pr = [];
+
+  for (var i=0; i < people.length; i++) {
+    pr[i] = {};
+    pr[i].name = people[i];
+    pr[i].relationships = {};
+
+    //initialize all relationships to 0
+    for (var j=0; j < people.length; j++) {
+      if (i != j) {
+        pr[i].relationships[people[j]] = 0;
+      }
+    }
+
+    //Now set the relationships.
+    for (var j=0; j < relationships.length; j++) {
+      if (relationships[j].source == pr[i].name) {
+        pr[i].relationships[relationships[j].target] = relationships[j].relation;
+      }
+      if (relationships[j].target == pr[i].name) {
+        pr[i].relationships[relationships[j].source] = relationships[j].relation;
+      }
+    }
+  }
+
+  alert(JSON.stringify(pr));
 }).controller("groupSelect", function ($scope, GroupMember, Relationships)
 {
     $scope.group = [];
