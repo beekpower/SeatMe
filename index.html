@@ -61,14 +61,17 @@
             .links(graph.links)
             .start();
 
-      function update() {
+
+
+
+
         var link = svg.selectAll(".link")
             .data(graph.links)
-          .enter().append("line")
+            .enter().append("line")
             .attr("class", "link");
         var node = svg.selectAll(".node")
             .data(graph.nodes)
-          .enter().append("rect")
+            .enter().append("rect")
             .attr("class", "node")
             .attr("width", function (d) { return d.width; })
             .attr("height", function (d) { return d.height; })
@@ -77,12 +80,17 @@
             .call(cola.drag);
         var label = svg.selectAll(".label")
             .data(graph.nodes)
-           .enter().append("text")
+            .enter().append("text")
             .attr("class", "label")
             .text(function (d) { return d.name; })
             .call(cola.drag);
+
+
         node.append("title")
             .text(function (d) { return d.name; });
+
+
+
         cola.on("tick", function () {
             link.attr("x1", function (d) { return d.source.x; })
                 .attr("y1", function (d) { return d.source.y; })
@@ -96,11 +104,42 @@
                      return d.y + h/4;
                  });
         });
-      }
+
+        function start() {
+         link = svg.selectAll(".link")
+              .data(graph.links)
+              .enter().append("line")
+              .attr("class", "link");
+          node = svg.selectAll(".node")
+              .data(graph.nodes)
+              .enter().append("rect")
+              .attr("class", "node")
+              .attr("width", function (d) { return d.width; })
+              .attr("height", function (d) { return d.height; })
+              .attr("rx", 5).attr("ry", 5)
+              .style("fill", function (d) { return color(1); })
+              .call(cola.drag);
+          label = svg.selectAll(".label")
+              .data(graph.nodes)
+              .enter().append("text")
+              .attr("class", "label")
+              .text(function (d) { return d.name; })
+              .call(cola.drag);
 
 
-      //  graph.nodes.push({"name":"lol","width":60,"height":40});
-        update();
+          node.append("title")
+              .text(function (d) { return d.name; });
+          cola.start();
+    }
+
+
+
+    setTimeout(function () {
+      graph.nodes.push({"name":"lol","width":60,"height":40});
+      start();
+    }, 6000);
+
+
 </script>
 
         <div class="mdl-layout__container">
