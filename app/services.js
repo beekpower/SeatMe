@@ -29,8 +29,10 @@ angular.module('services', [])
 
       return fitness;
     }
+  }
 
-
+  this.evolve = function() {
+    genetic.evolve();
   }
 })
 .factory('GroupMember', function ()
