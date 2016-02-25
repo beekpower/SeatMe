@@ -20,3 +20,23 @@
     </span>
   </li>
 </ul>
+
+<hr>
+<div ng-repeat="relationship in relationships">
+  <select ng-model="relationship.source">
+      <option ng-repeat="person in people" value="person"  ng-show="member.name !== data.rightMember">{{member.name}}</option>
+  </select>
+  &nbsp; is &nbsp;
+  <select ng-model="data.relationship">
+      <option ng-repeat="(relation, value) in relationshipCodes" value="{{relation}}">{{relation}}</option>
+  </select>
+  &nbsp;  with &nbsp;
+  <select ng-model="data.rightMember">
+      <option ng-repeat="member in group" value="{{member.name}}" ng-show="member.name !== data.leftMember">{{member.name}}</option>
+  </select>
+   <div class="mdl-cell mdl-cell--4-col">
+      <button ng-click="setRelation()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+          <i class="material-icons">+</i>
+      </button>
+  </div>
+</div>

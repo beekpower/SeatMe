@@ -71,7 +71,15 @@ angular.module('controllers', [])
 }).controller("geneticAlgorithm", function ($scope) {
 
 }).controller("peopleController", function ($scope) {
-  $scope.people = [];
+  $scope.people = ["Nick", "Tyler", "Zach"];
+
+  $scope.relationships = [
+    { source: "Nick", target: "Tyler", relation: 2},
+    { source: "Nick", target: "Zach", relation: 2}
+  ];
+
+  $scope.relationshipCodes = Relationships;
+
   $scope.add = function(name) {
     $scope.name = "";
     $scope.people.push(name);
@@ -80,4 +88,6 @@ angular.module('controllers', [])
   $scope.remove = function(index) {
     $scope.people.splice(index, 1);
   }
+
+
 });
