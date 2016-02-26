@@ -6,6 +6,11 @@ angular.module('services', [])
   var pr;
   var config;
 
+  this.getPeople = function ()
+  {
+    return pr;
+  };
+  
   this.init = function(input, isUniform, conf) {
     config = conf;
     isUniform = isUniform || true;

@@ -1,6 +1,6 @@
 angular.module('controllers', [])
 .controller("geneticAlgorithm", function ($scope, Genetic) {
-  var chartData ={
+  /*var chartData ={
     keys: {
       "mean": 0,
       "maximum":1,
@@ -19,15 +19,79 @@ angular.module('controllers', [])
     data: {
       columns: chartData.array
     }
-  });
+  });*/
+
+  var chartData = {
+    labels: [0],
+    datasets: [
+        {
+            label: "maximum",
+            color: "rgba(255,0,0,0.2)",
+            fillColor: "rgba(255,0,0,0.2)",
+            strokeColor: "rgba(255,0,0,1)",
+            pointColor: "rgba(255,0,0,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(255,0,0,1)",
+            data: []
+        },
+        {
+            label: "minimum",
+            color: "rgba(151,187,205,1)",
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: []
+        },
+        {
+            label: "mean",
+            color: "rgba(220,220,220,1)",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: []
+        },
+        {
+            label: "stdev",
+            color: "rgba(200, 200, 200,1)",
+            fillColor: "rgba(200, 200, 200,0.2)",
+            strokeColor: "rgba(200, 200, 200,1)",
+            pointColor: "rgba(200, 200, 200,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(200, 200, 200,1)",
+            data: []
+        }
+    ]
+};
+
+  var ctx = document.getElementById("chart").getContext("2d");
+  var chart = new Chart(ctx).Line(chartData,{responsive: true,  datasetFill : false,
+      legendTemplate : '<ul>'
+                  +'<% for (var i=0; i<datasets.length; i++) { %>'
+                    +'<li>'
+                    +'<span style=\"background-color:<%=datasets[i].strokeColor%>\"></span>'
+                    +'<% if (datasets[i].label) { %><%= datasets[i].label %><% } %>'
+                  +'</li>'
+                +'<% } %>'
+              +'</ul>'
+});
+  document.getElementById("chartLegend").innerHTML = chart.generateLegend();
+  $scope.best = Genetic.getPeople();
   
   Genetic.notify(function (best, gen, stats, isFinished)
   {
-    for(var key in stats)
-      chartData.array[chartData.keys[key]].push(stats[key]);
-    chart.load({
-      columns: chartData.array
-    })
+    var data = [];
+    for(var i in stats)
+      data.push(stats[i]);
+    chart.addData(data, gen);
+    $scope.best = best.entity;
     
   });
 
