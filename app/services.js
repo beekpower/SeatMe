@@ -1,5 +1,13 @@
 (function ()
 {
+  var relationships = {
+        "no relation": 0,
+        "enemies": -1,
+        "besties": 2,
+        "aquantences": 1,
+        "lovers": 3
+      };
+
     angular.module('services', [])
     
 .service('Genetic', function() {
@@ -58,19 +66,19 @@
 
     genetic.fitness = function(chromosome) {
       var fitness = 0;
-          for (var i=0; i<chromosome.length - 1; i++) 
-          {
-            fitness += chromosome[i].getFitness(chromosome[i+1]);
-          }
+        for (var i=0; i<chromosome.length - 1; i++) 
+        {
+          fitness += chromosome[i].getFitness(chromosome[i+1]);
+        }
 
           return fitness;
         }
-      }
+  }
 
       this.evolve = function() {
         genetic.evolve();
       }
-    })
+})
     .factory('GroupMember', function ()
     {
       return function (name)
@@ -90,19 +98,13 @@
 
           this.addRelation = function (level, member)
           {
-              this.relations[member] = level;
+              this.relations[member] = relationships[level];
           };
       };
     })
     .factory("Relationships", function ()
     {
-      var relationships = {
-        "no relation": 0,
-        "enemies": -1,
-        "besties": 2,
-        "aquantences": 1,
-        "lovers": 3
-      };
+      
       return relationships;
     });
 })();
