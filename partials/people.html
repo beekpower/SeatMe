@@ -13,13 +13,15 @@
       <a ng-click="add(name)" class="waves-effect waves-light btn">Add</a>
     </div>
     <div class="row">
-      <ul class="collection with-header">
-        <li class="collection-header"><h4>People</h4></li>
-        <li ng-repeat="person in people track by $index" class="collection-item">
-          {{person}}
-          <a class="secondary-content"><i ng-click="remove($index)" class="material-icons">clear</i></a>
-        </li>
-      </ul>
+      <div class="card">
+        <ul class="collection with-header">
+          <li class="collection-header"><h4>People</h4></li>
+          <li ng-repeat="person in people track by $index" class="collection-item">
+            {{person}}
+            <a class="secondary-content"><i ng-click="remove($index)" class="material-icons">clear</i></a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -50,7 +52,7 @@
     </div>
 
     <div class="row">
-      <div class="row">
+      <div class="card">
         <ul class="collection with-header">
           <li class="collection-header"><h4>Relationships</h4></li>
           <li ng-repeat="relationship in relationships" class="collection-item">
