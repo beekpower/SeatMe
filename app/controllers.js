@@ -38,21 +38,19 @@ angular.module('controllers', [])
   Genetic.evolve();
 
 }).controller("peopleController", function ($scope, Genetic, GroupMember, Relationships) {
-  $scope.people = [];
+  $scope.people = ["Nick", "Tyler", "Zach"];
 
-  $scope.relationship = {source: "", target: "",relation: ""};
+  $scope.relationships = [
+    { source: "Nick", target: "Tyler", relation: 2},
+    { source: "Nick", target: "Zach", relation: 2}
+  ];
+
+  //$scope.relationship = {source: "", target: "",relation: ""};
   $scope.relationshipCodes = Relationships;
 
   $scope.add = function(name)
   {
-    $scope.name = "";
-    var newMember = new GroupMember(name);
-    for(var i = 0; i < $scope.people.length; i++)
-    {
-        $scope.people[i].addRelation("no relation", newMember.name);
-        newMember.addRelation("no relation", $scope.people[i].name);
-    }
-    $scope.people.push(newMember);
+    $scope.people.push(name);
   }
 
   $scope.remove = function(index)
@@ -60,19 +58,18 @@ angular.module('controllers', [])
     $scope.people.splice(index, 1);
   }
 
-  $scope.setRelation = function (relationship)
-  {
-    for (var i = 0; i < $scope.people.length; i++)
-    {
-      if ($scope.people[i].name === relationship.source)
-          $scope.people[i].addRelation(relationship.relation, relationship.target);
-      else if ($scope.people[i].name === relationship.target)
-          $scope.people[i].addRelation(relationship.relation, relationship.source);
-    }
-  };
-    $scope.add("tyler");$scope.add("poop");$scope.add("SHITHEAD");
-    $scope.setRelation({target: "tyler", source:"poop", "relation": "enemies"});
-    $scope.setRelation({target:"SHITHEAD", source:"poop", "relation": "lovers"});
+  // $scope.setRelation = function (relationship)
+  // {
+  //   for (var i = 0; i < $scope.people.length; i++)
+  //   {
+  //     if ($scope.people[i].name === relationship.source)
+  //         $scope.people[i].addRelation(relationship.relation, relationship.target);
+  //     else if ($scope.people[i].name === relationship.target)
+  //         $scope.people[i].addRelation(relationship.relation, relationship.source);
+  //   }
+  // };
+  //  $scope.setRelation({target: "tyler", source:"poop", "relation": "enemies"});
+  //  $scope.setRelation({target:"SHITHEAD", source:"poop", "relation": "lovers"});
   $scope.submit = function ()
   {
     Genetic.init($scope.people);
