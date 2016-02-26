@@ -20,7 +20,7 @@ angular.module('directives', [])
 
       function loadNodes() {
         for (var i=0; i < scope.people.length; i++) {
-          nodes.push({ name: scope.people[i], width: 60, height: 40});
+          nodes.push({ name: scope.people[i], width: 120, height: 40});
         }
       }
 
