@@ -103,16 +103,10 @@ angular.module('directives', [])
       loadLinks();
       start();
 
-      scope.$watch('people.length', function() {
+      scope.$watch('people.length + relationships.length', function() {
         links.splice(0, links.length);
         nodes.splice(0, nodes.length);
         loadNodes();
-        loadLinks();
-        start();
-      });
-
-      scope.$watch('relationships.length', function() {
-        links.splice(0, links.length);
         loadLinks();
         start();
       });
