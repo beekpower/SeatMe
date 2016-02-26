@@ -74,9 +74,9 @@
     genetic.fitness = function(chromosome) {
       var fitness = 0;
       for (var i=0; i<chromosome.length - 1; i++) {
-        for (var person in chromosome[i].relations) {
+        for (var person in chromosome[i].relationships) {
                  if (person == chromosome[i+1].name) {
-                   fitness += chromosome[i].relations[person];
+                   fitness += chromosome[i].relationships[person];
                   break;
             }
           }
@@ -99,32 +99,9 @@
           genetic.evolve(config, userData);
       }
 })
-    .factory('GroupMember', function ()
-    {
-      return function (name)
-      {
-          this.name = name;
+.factory("Relationships", function ()
+{
 
-          // Takes left and
-          this.getFitness = function (memberOnRight)
-          {
-              if(memberOnRight)
-                  return relationships[this.relations[memberOnRight.name]];
-
-              return 0;
-          };
-
-          this.relations = {};
-
-          this.addRelation = function (level, member)
-          {
-              this.relations[member] = relationships[level];
-          };
-      };
-    })
-    .factory("Relationships", function ()
-    {
-
-      return relationships;
-    });
+  return relationships;
+});
 })();
