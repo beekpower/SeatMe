@@ -2,22 +2,29 @@ angular.module('directives', [])
 .directive('cola', function() {
   return {
     restrict: 'E',
+    scope: {
+      people: '=',
+      relationships: '='
+    },
     link: function(scope, elem, attrs) {
+      var nodes = [];
 
-      var nodes = [
-            {"name":"a","width":60,"height":40},
-            {"name":"b","width":60,"height":40},
-            {"name":"c","width":60,"height":40},
-            {"name":"d","width":60,"height":40},
-            {"name":"e","width":60,"height":40}
-          ];
+      for (var i=0; i < scope.people.length; i++) {
+        nodes.push({ name: scope.people[i], width: 60, height: 40});
+      }
 
-      var links = [
-            {"source":0,"target":1},
-            {"source":1,"target":2},
-            {"source":2,"target":0},
-            {"source":2,"target":3}
-      ];
+      var links = [];
+
+      for (var i=0; i < scope.relationships.length; i++) {
+      //  nodes.push({ name: scope.people[i], width: 60, height: 40 });
+      }
+
+      // var links = [
+      //       {"source":0,"target":1},
+      //       {"source":1,"target":2},
+      //       {"source":2,"target":0},
+      //       {"source":2,"target":3}
+      // ];
 
 
 
@@ -38,11 +45,6 @@ angular.module('directives', [])
       var node = svg.selectAll(".node");
       var link = svg.selectAll(".link");
       var label = svg.selectAll(".label")
-
-
-
-
-
 
       function start() {
         link = link.data(d3cola.links());
@@ -71,10 +73,11 @@ angular.module('directives', [])
                      .attr("class", "label")
                      .text(function (d) { return d.name; })
                      .call(d3cola.drag);
+        label.exit().remove();
 
         node.append("title")
             .text(function (d) { return d.name; });
-            
+
         d3cola.start();
       }
 
@@ -97,7 +100,7 @@ angular.module('directives', [])
 
 
       setTimeout(function () {
-        nodes.push(      {"name":"lol","width":60,"height":40});
+        nodes.push({"name":"lol","width":60,"height":40});
         start();
       }, 6000);
     }
