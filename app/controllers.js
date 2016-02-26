@@ -9,21 +9,25 @@ angular.module('controllers', [])
     { source: "Nick", target: "Zach", relation: 2}
   ];
 
-  //$scope.relationship = {source: "", target: "",relation: ""};
   $scope.relationshipCodes = Relationships;
 
-  $scope.add = function(name)
-  {
+  $scope.add = function(name) {
     $scope.people.push(name);
   }
 
-  $scope.remove = function(index)
-  {
+  $scope.remove = function(index) {
     $scope.people.splice(index, 1);
   }
 
-  $scope.submit = function ()
-  {
+  $scope.addRelationship = function() {
+
+  }
+
+  $scope.removeRelationship = function(index) {
+    $scope.relationships.splice(index, 1);
+  }
+
+  $scope.submit = function() {
     var pr = [];
     for (var i=0; i < $scope.people.length; i++) {
       pr[i] = {};
