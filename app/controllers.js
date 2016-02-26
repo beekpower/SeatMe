@@ -45,6 +45,13 @@ angular.module('controllers', [])
   $scope.relationshipCodes = Relationships.getRelationships();
   $scope.getRelationship = Relationships.getRelationship;
 
+  $scope.config = {
+        "iterations": 200
+        , "size": 250
+        , "crossover": 0.3
+        , "mutation": 0.3
+        , "skip": 10
+      };
   $scope.add = function(name) {
     $scope.name = "";
     $scope.people.push(name);
@@ -89,7 +96,7 @@ angular.module('controllers', [])
       }
     }
 
-    Genetic.init(pr, $scope.algorithm);
+    Genetic.init(pr, $scope.algorithm, $scope.config);
     window.location.hash = "/generator";
   }
 });

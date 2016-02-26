@@ -4,8 +4,10 @@ angular.module('services', [])
 .service('Genetic', function() {
   var genetic;
   var pr;
+  var config;
 
-  this.init = function(input, isUniform) {
+  this.init = function(input, isUniform, conf) {
+    config = conf;
     isUniform = isUniform || true;
     pr = input;
     genetic = Genetic.create();
@@ -76,14 +78,8 @@ angular.module('services', [])
     }
   };
 
-  this.evolve = function(config) {
-    var config = config || {
-        "iterations": 200
-        , "size": 250
-        , "crossover": 0.3
-        , "mutation": 0.3
-        , "skip": 10
-      };
+  this.evolve = function() {
+    
       var userData = {
       	"data": pr
       };
