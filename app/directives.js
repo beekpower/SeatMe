@@ -44,6 +44,8 @@ angular.module('directives', [])
           .attr("width", width)
           .attr("height", height);
 
+      $(elem).find("svg").css("width", "100%")
+
       var node = svg.selectAll(".node");
       var link = svg.selectAll(".link");
       var link2 = svg.selectAll(".link2");
