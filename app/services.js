@@ -15,6 +15,43 @@ angular.module('services', [])
       return people;
     }
 
+    genetic.crossover = function(mother, father) {
+
+      var fatherCut = [];
+      var motherCut;
+      var index = mother.length / 2;
+      index = index.toFixed();
+
+      motherCut = mother.splice(index, mother.length - index);
+
+      for (var i=0; i < motherCut.length; i++) {
+        for (var j=0; j < father.length; i++) {
+          if (father[j] == motherCut[i]) {
+            fatherCut.push(father.splice(j, 1));
+          }
+        }
+        daughter = fatherCut.push(mother);
+        son = father.push(motherCut);
+      }
+
+      return [son, daughter];
+    }
+
+    genetic.mutate = function(chromosome) {
+      var first = Math.floor(Math.random() * chromosome.length);
+      var second = Math.floor(Math.random() * chromosome.length);
+
+      while (first == second) {
+        second = Math.floor(Math.random() * chromosome.length);
+      }
+
+      var temp = chromosome[first];
+      chromosome[first] = chromosome[second];
+      chromosome[second] = temp;
+
+      return chromosome;
+    }
+
     genetic.fitness = function(chromosome) {
       var fitness = 0;
 
