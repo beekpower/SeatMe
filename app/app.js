@@ -4,12 +4,9 @@
     SeatMe.config(["$routeProvider", function ($routeProvider)
     {
         $routeProvider.when("/", {
-            controller: "groupSelect",
-            templateUrl: "partials/groupSelect.html"
-        }).when("/people", {
             controller: "peopleController",
             templateUrl: "partials/people.html"
-        }).when("/genetic", {
+        }).when("/generator", {
             controller: "geneticAlgorithm",
             templateUrl: "partials/genetic.html"
         }).otherwise({

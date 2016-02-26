@@ -33,61 +33,50 @@ angular.module('controllers', [])
   }
 
   alert(JSON.stringify(pr));
-}).controller("groupSelect", function ($scope, GroupMember, Relationships)
-{
-    $scope.group = [];
-    $scope.newMember = '';
-    $scope.data = {
-        leftMember: "",
-        rightMember: "",
-        relationship: ""
-    };
-    $scope.relationships = Relationships;
-
-    $scope.setRelation = function ()
-    {
-        for (var i = 0; i < $scope.group.length; i++)
-        {
-            if ($scope.group[i].name === $scope.data.leftMember)
-                $scope.group[i].addRelation($scope.data.relationship, $scope.data.rightMember);
-            else if ($scope.group[i].name === $scope.data.rightMember)
-                $scope.group[i].addRelation($scope.data.relationship, $scope.data.leftMember);
-        }
-    };
-
-    $scope.addMember = function ()
-    {
-        var newMember = new GroupMember($scope.newMember);
-        for(var i = 0; i < $scope.group.length; i++)
-        {
-            $scope.group[i].addRelation("no relation", newMember.name);
-            newMember.addRelation("no relation", $scope.group[i].name);
-        }
-        console.log($scope.group);
-        $scope.group.push(newMember);
-        $scope.newMember = '';
-    };
 
 }).controller("geneticAlgorithm", function ($scope) {
 
-}).controller("peopleController", function ($scope, Relationships, $interval) {
-  $scope.people = ["Nick", "Tyler", "Zach"];
+}).controller("peopleController", function ($scope, Genetic, GroupMember, Relationships, $interval) {
+  $scope.people = [];
 
-  $scope.relationships = [
-    { source: "Nick", target: "Tyler", relation: 2},
-    { source: "Nick", target: "Zach", relation: 2}
-  ];
-
+  $scope.relationship = {source: "", target: "",relation: ""};
   $scope.relationshipCodes = Relationships;
 
-  $scope.add = function(name) {
+  $scope.add = function(name) 
+  {
     $scope.name = "";
-    $scope.people.push(name);
+    var newMember = new GroupMember(name);
+    for(var i = 0; i < $scope.people.length; i++)
+    {
+        $scope.people[i].addRelation("no relation", newMember.name);
+        newMember.addRelation("no relation", $scope.people[i].name);
+    }
+    $scope.people.push(newMember);
   }
 
-  $scope.remove = function(index) {
+  $scope.remove = function(index) 
+  {
     $scope.people.splice(index, 1);
   }
+
+  $scope.setRelation = function (relationship)
+  {
+    console.log(relationship)
+    for (var i = 0; i < $scope.people.length; i++)
+    {
+      if ($scope.people[i].name === relationship.source)
+          $scope.people[i].addRelation(relationship.relation, relationship.target);
+      else if ($scope.people[i].name === relationship.target)
+          $scope.people[i].addRelation(relationship.relation, relationship.source);
+    }
+  };
+
+  $scope.submit = function ()
+  {
+    Genetic.init($scope.people);
+    window.location.hash = "/generator";
+  }
+
 
 
 
