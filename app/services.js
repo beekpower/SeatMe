@@ -9,19 +9,20 @@
       };
 
     angular.module('services', [])
-    
+
 .service('Genetic', function() {
   var genetic;
-  var people;
+  var pr;
 
-  this.init = function(pr) {
+  this.init = function(input) {
+    pr = input;
     genetic = Genetic.create();
     genetic.optimize = Genetic.Optimize.Maximize;
     genetic.select1 = Genetic.Select1.Tournament2;
     genetic.select2 = Genetic.Select2.Tournament2;
 
     genetic.seed = function() {
-      return pr;
+      return this.userData["data"];
     }
 
     genetic.crossover = function(mother, father) {
@@ -66,17 +67,32 @@
 
     genetic.fitness = function(chromosome) {
       var fitness = 0;
-        for (var i=0; i<chromosome.length - 1; i++) 
-        {
-          fitness += chromosome[i].getFitness(chromosome[i+1]);
-        }
+
+      for (var i=0; i<chromosome.length - 1; i++) {
+        for (var person in chromosome[i].relationships) {
+                 if (person == chromosome[i+1].name) {
+                   fitness += chromosome[i].relationships[person];
+                  break;
+            }
+          }
+       }
 
           return fitness;
         }
-  }
+    };
 
       this.evolve = function() {
-        genetic.evolve();
+        var config = {
+            "iterations": 4000
+            , "size": 250
+            , "crossover": 0.3
+            , "mutation": 0.3
+            , "skip": 20
+          };
+          var userData = {
+		      	"data": pr
+		      };
+          genetic.evolve(config, userData);
       }
 })
     .factory('GroupMember', function ()

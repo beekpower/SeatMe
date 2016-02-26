@@ -34,7 +34,8 @@ angular.module('controllers', [])
 
   alert(JSON.stringify(pr));
 
-}).controller("geneticAlgorithm", function ($scope) {
+}).controller("geneticAlgorithm", function ($scope, Genetic) {
+  Genetic.evolve();
 
 }).controller("peopleController", function ($scope, Genetic, GroupMember, Relationships, $interval) {
   $scope.people = [];
@@ -42,7 +43,7 @@ angular.module('controllers', [])
   $scope.relationship = {source: "", target: "",relation: ""};
   $scope.relationshipCodes = Relationships;
 
-  $scope.add = function(name) 
+  $scope.add = function(name)
   {
     $scope.name = "";
     var newMember = new GroupMember(name);
@@ -54,7 +55,7 @@ angular.module('controllers', [])
     $scope.people.push(newMember);
   }
 
-  $scope.remove = function(index) 
+  $scope.remove = function(index)
   {
     $scope.people.splice(index, 1);
   }
