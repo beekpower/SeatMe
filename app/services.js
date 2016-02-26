@@ -110,5 +110,9 @@ angular.module('services', [])
       }
     }
   }
+
+  this.getCode = function(input) {
+    return relationships[input];
+  }
 });
 })();
