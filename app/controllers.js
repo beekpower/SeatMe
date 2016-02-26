@@ -10,7 +10,8 @@ angular.module('controllers', [])
     { source: "Nick", target: "Zach", relation: 2}
   ];
 
-  $scope.relationshipCodes = Relationships;
+  $scope.relationshipCodes = Relationships.getRelationships();
+  $scope.getRelationship = Relationships.getRelationship;
 
   $scope.add = function(name) {
     $scope.people.push(name);

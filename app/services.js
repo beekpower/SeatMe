@@ -90,7 +90,7 @@ angular.module('services', [])
       genetic.evolve(config, userData);
   }
 })
-.factory("Relationships", function() {
+.service("Relationships", function() {
   var relationships = {
         "no relation": 0,
         "enemies": -1,
@@ -98,6 +98,17 @@ angular.module('services', [])
         "aquantences": 1,
         "lovers": 3
   };
-  return relationships;
+
+  this.getRelationships = function() {
+    return relationships;
+  }
+
+  this.getRelationship = function(input) {
+    for (code in relationships) {
+      if (relationships[code] == input) {
+        return code;
+      }
+    }
+  }
 });
 })();
