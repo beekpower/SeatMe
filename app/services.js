@@ -1,29 +1,26 @@
 (function ()
 {
     angular.module('services', [])
-    .service('Genetic', function() {
-      var genetic;
-      var people;
+    
+.service('Genetic', function() {
+  var genetic;
+  var people;
 
-      this.init = function(p) {
-        people = p;
-        console.log(p)
-        genetic = Genetic.create();
-        genetic.optimize = Genetic.Optimize.Maximize;
-        genetic.select1 = Genetic.Select1.Tournament2;
-        genetic.select2 = Genetic.Select2.Tournament2;
+  this.init = function(pr) {
+    genetic = Genetic.create();
+    genetic.optimize = Genetic.Optimize.Maximize;
+    genetic.select1 = Genetic.Select1.Tournament2;
+    genetic.select2 = Genetic.Select2.Tournament2;
 
-        genetic.seed = function() {
-          return people;
-        }
+    genetic.seed = function() {
+      return pr;
+    }
 
-        genetic.crossover = function(mother, father) {
-
-          var fatherCut = [];
-          var motherCut;
-          var index = mother.length / 2;
-          index = index.toFixed();
-
+    genetic.crossover = function(mother, father) {
+      var fatherCut = [];
+      var motherCut;
+      var index = mother.length / 2;
+      index = index.toFixed();
           motherCut = mother.splice(index, mother.length - index);
 
           for (var i=0; i < motherCut.length; i++) {
@@ -53,6 +50,11 @@
 
         return chromosome;
     }
+
+    genetic.generation = function(pop, generation, stats) {
+	    // stop running once we've reached the solution
+	    console.log(JSON.strinify(pop[0].entity));
+    };
 
     genetic.fitness = function(chromosome) {
       var fitness = 0;
