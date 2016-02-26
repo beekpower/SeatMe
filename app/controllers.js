@@ -37,7 +37,7 @@ angular.module('controllers', [])
 }).controller("geneticAlgorithm", function ($scope, Genetic) {
   Genetic.evolve();
 
-}).controller("peopleController", function ($scope, Genetic, GroupMember, Relationships, $interval) {
+}).controller("peopleController", function ($scope, Genetic, GroupMember, Relationships) {
   $scope.people = [];
 
   $scope.relationship = {source: "", target: "",relation: ""};

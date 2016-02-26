@@ -28,12 +28,15 @@
     genetic.crossover = function(mother, father) {
       var fatherCut = [];
       var motherCut;
+      var daughter;
+      var son;
       var index = mother.length / 2;
+      console.log(father);
       index = index.toFixed();
           motherCut = mother.splice(index, mother.length - index);
 
           for (var i=0; i < motherCut.length; i++) {
-            for (var j=0; j < father.length; i++) {
+            for (var j=0; j < father.length; j++) {
               if (father[j] == motherCut[i]) {
                 fatherCut.push(father.splice(j, 1));
               }
@@ -46,8 +49,10 @@
         }
 
       genetic.mutate = function(chromosome) {
-        var first = Math.floor(Math.random() * chromosome.length);
-        var second = Math.floor(Math.random() * chromosome.length);
+        var first = Math.random() * chromosome.length;
+        var second = Math.random() * chromosome.length;
+
+        console.log(chromosome.length);
 
         while (first == second) {
           second = Math.floor(Math.random() * chromosome.length);
@@ -60,14 +65,19 @@
         return chromosome;
     }
 
+    genetic.notification = function(pop, generation, stats, isFinished) {
+      console.log(stats);
+    };
+
     genetic.generation = function(pop, generation, stats) {
 	    // stop running once we've reached the solution
-	    console.log(JSON.stringify(pop[0].entity));
+	    console.log("asdfa");
+      return true;
     };
 
     genetic.fitness = function(chromosome) {
       var fitness = 0;
-
+      console.log("fitness");
       for (var i=0; i<chromosome.length - 1; i++) {
         for (var person in chromosome[i].relationships) {
                  if (person == chromosome[i+1].name) {
@@ -83,8 +93,8 @@
 
       this.evolve = function() {
         var config = {
-            "iterations": 4000
-            , "size": 250
+            "iterations": 5
+            , "size": 5
             , "crossover": 0.3
             , "mutation": 0.3
             , "skip": 20
@@ -120,7 +130,7 @@
     })
     .factory("Relationships", function ()
     {
-      
+
       return relationships;
     });
 })();
