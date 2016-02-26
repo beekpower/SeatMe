@@ -63,7 +63,7 @@
     }
 
     genetic.notification = function(pop, generation, stats, isFinished) {
-
+      console.log("NOTIFFFFFFFFFF",pop[0], generation, stats, isFinished)
     };
 
     genetic.generation = function(pop, generation, stats) {
@@ -74,22 +74,21 @@
     genetic.fitness = function(chromosome) {
       var fitness = 0;
       for (var i=0; i<chromosome.length - 1; i++) {
-        for (var person in chromosome[i].relationships) {
+        for (var person in chromosome[i].relations) {
                  if (person == chromosome[i+1].name) {
-                   fitness += chromosome[i].relationships[person];
+                   fitness += chromosome[i].relations[person];
                   break;
             }
           }
        }
-
           return fitness;
         }
     };
 
       this.evolve = function() {
         var config = {
-            "iterations": 5
-            , "size": 5
+            "iterations": 200
+            , "size": 250
             , "crossover": 0.3
             , "mutation": 0.3
             , "skip": 20

@@ -62,7 +62,6 @@ angular.module('controllers', [])
 
   $scope.setRelation = function (relationship)
   {
-    console.log(relationship)
     for (var i = 0; i < $scope.people.length; i++)
     {
       if ($scope.people[i].name === relationship.source)
@@ -71,8 +70,9 @@ angular.module('controllers', [])
           $scope.people[i].addRelation(relationship.relation, relationship.source);
     }
   };
-    $scope.add("tyler");$scope.add("poop");$scope.setRelation({target: "tyler", source:"poop", "relation": "enemies"});
-
+    $scope.add("tyler");$scope.add("poop");$scope.add("SHITHEAD");
+    $scope.setRelation({target: "tyler", source:"poop", "relation": "enemies"});
+    $scope.setRelation({target:"SHITHEAD", source:"poop", "relation": "lovers"});
   $scope.submit = function ()
   {
     Genetic.init($scope.people);
