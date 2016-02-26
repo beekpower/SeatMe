@@ -52,7 +52,7 @@
       <div class="input-field col s4">
         <select ng-model="relationship.relation" class="browser-default">
           <option value="" disabled selected>--Relation--</option>
-          <option ng-repeat="(relation, value) in relationshipCodes" value="{{value}}">{{relation}}</option>
+          <option ng-repeat="(relation, value) in relationshipCodes" value="{{relation}}">{{value.type}}</option>
         </select>
       </div>
 
