@@ -3,20 +3,17 @@ angular.module('services', [])
   var genetic;
   var people;
 
-  this.init = function(p) {
-    people = p;
-
+  this.init = function(pr) {
     genetic = Genetic.create();
     genetic.optimize = Genetic.Optimize.Maximize;
     genetic.select1 = Genetic.Select1.Tournament2;
     genetic.select2 = Genetic.Select2.Tournament2;
 
     genetic.seed = function() {
-      return people;
+      return pr;
     }
 
     genetic.crossover = function(mother, father) {
-
       var fatherCut = [];
       var motherCut;
       var index = mother.length / 2;
@@ -51,6 +48,11 @@ angular.module('services', [])
 
       return chromosome;
     }
+
+    genetic.generation = function(pop, generation, stats) {
+	    // stop running once we've reached the solution
+	    Console.log(JSON.strinify(pop[0].entity));
+    };
 
     genetic.fitness = function(chromosome) {
       var fitness = 0;
