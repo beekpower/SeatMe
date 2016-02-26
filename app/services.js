@@ -27,32 +27,29 @@
 
     genetic.crossover = function(mother, father) {
       var fatherCut = [];
-      var motherCut;
+      var motherCut = [];
       var daughter;
       var son;
       var index = mother.length / 2;
-      console.log(father);
-      index = index.toFixed();
-          motherCut = mother.splice(index, mother.length - index);
-
+      index = parseInt(index);
+          motherCut = mother.splice(index, mother.length - index + 1);
           for (var i=0; i < motherCut.length; i++) {
             for (var j=0; j < father.length; j++) {
-              if (father[j] == motherCut[i]) {
-                fatherCut.push(father.splice(j, 1));
+              if (father[j].name == motherCut[i].name) {
+                fatherCut = fatherCut.concat(father.splice(j, 1));
               }
             }
-            daughter = fatherCut.push(mother);
-            son = father.push(motherCut);
+            daughter = fatherCut.concat(mother);
+            son = father.concat(motherCut);
           }
 
           return [son, daughter];
         }
 
       genetic.mutate = function(chromosome) {
-        var first = Math.random() * chromosome.length;
-        var second = Math.random() * chromosome.length;
+        var first = Math.floor(Math.random() * chromosome.length);
+        var second = Math.floor(Math.random() * chromosome.length);
 
-        console.log(chromosome.length);
 
         while (first == second) {
           second = Math.floor(Math.random() * chromosome.length);
@@ -66,18 +63,16 @@
     }
 
     genetic.notification = function(pop, generation, stats, isFinished) {
-      console.log(stats);
+
     };
 
     genetic.generation = function(pop, generation, stats) {
 	    // stop running once we've reached the solution
-	    console.log("asdfa");
       return true;
     };
 
     genetic.fitness = function(chromosome) {
       var fitness = 0;
-      console.log("fitness");
       for (var i=0; i<chromosome.length - 1; i++) {
         for (var person in chromosome[i].relationships) {
                  if (person == chromosome[i+1].name) {

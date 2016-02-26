@@ -71,6 +71,7 @@ angular.module('controllers', [])
           $scope.people[i].addRelation(relationship.relation, relationship.source);
     }
   };
+    $scope.add("tyler");$scope.add("poop");$scope.setRelation({target: "tyler", source:"poop", "relation": "enemies"});
 
   $scope.submit = function ()
   {
