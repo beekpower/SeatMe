@@ -8,11 +8,6 @@ angular.module('directives', [])
     },
     link: function(scope, elem, attrs) {
       var nodes = [];
-
-      for (var i=0; i < scope.people.length; i++) {
-        nodes.push({ name: scope.people[i], width: 60, height: 40});
-      }
-
       var links = [];
 
       function getPersonIndex(name) {
@@ -23,18 +18,17 @@ angular.module('directives', [])
         }
       }
 
-      for (var i=0; i < scope.relationships.length; i++) {
-        links.push({ source: getPersonIndex(scope.relationships[i].source), target: getPersonIndex(scope.relationships[i].target) });
+      function loadNodes() {
+        for (var i=0; i < scope.people.length; i++) {
+          nodes.push({ name: scope.people[i], width: 60, height: 40});
+        }
       }
 
-      // var links = [
-      //       {"source":0,"target":1},
-      //       {"source":1,"target":2},
-      //       {"source":2,"target":0},
-      //       {"source":2,"target":3}
-      // ];
-
-
+      function loadLinks() {
+        for (var i=0; i < scope.relationships.length; i++) {
+          links.push({ source: getPersonIndex(scope.relationships[i].source), target: getPersonIndex(scope.relationships[i].target) });
+        }
+      }
 
       var width = 960, height = 500;
       var color = d3.scale.category20();
@@ -104,13 +98,24 @@ angular.module('directives', [])
              });
       }
 
+
+      loadNodes();
+      loadLinks();
       start();
 
-
-      setTimeout(function () {
-        nodes.push({"name":"lol","width":60,"height":40});
+      scope.$watch('people.length', function() {
+        links.splice(0, links.length);
+        nodes.splice(0, nodes.length);
+        loadNodes();
+        loadLinks();
         start();
-      }, 6000);
+      });
+
+      scope.$watch('relationships.length', function() {
+        links.splice(0, links.length);
+        loadLinks();
+        start();
+      });
     }
   };
 });
