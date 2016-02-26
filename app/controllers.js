@@ -51,9 +51,7 @@ angular.module('controllers', [])
         }
       }
     }
-
-    alert(JSON.stringify(pr));
-
+    
     Genetic.init(pr);
     window.location.hash = "/generator";
   }
