@@ -23,6 +23,7 @@ angular.module('controllers', [])
 
   $scope.addRelationship = function(relationship) {
     $scope.relationships.push(relationship);
+    $scope.relationship = { source: "", target: "", relation: ""};
   }
 
   $scope.removeRelationship = function(index) {
