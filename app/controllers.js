@@ -16,7 +16,6 @@ angular.module('controllers', [])
   $scope.add = function(name) {
     $scope.name = "";
     $scope.people.push(name);
-    $scope.people = "";
   }
 
   $scope.remove = function(index) {
