@@ -1,42 +1,70 @@
-<div class="mdl-textfield mdl-js-textfield">
-  <input ng-model="name" class="mdl-textfield__input" type="text" id="sample1">
-  <label class="mdl-textfield__label" for="sample1">Name</label>
+<div class="row">
+  <div class="input-field col s6">
+    <input ng-model="name" id="name" type="text" class="validate">
+    <label for="name">Name</label>
+  </div>
+  <a ng-click="add(name)"class="waves-effect waves-light btn">Add</a>
 </div>
 
-<button ng-click="add(name)" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-  Add
-</button>
+<div class="row">
+  <ul class="collection with-header">
+    <li class="collection-header"><h4>First Names</h4></li>
+    <li ng-repeat="person in people track by $index" class="collection-item"><div>{{person}}<a class="secondary-content"><i ng-click="remove($index)" class="material-icons">clear</i></a></div></li>
+  </ul>
+</div>
 
-<ul class="demo-list-control mdl-list">
-  <li ng-repeat="person in people track by $index" class="mdl-list__item">
-    <span class="mdl-list__item-primary-content">
-      <i class="material-icons  mdl-list__item-avatar">person</i>
-      {{person}}
-    </span>
-    <span class="mdl-list__item-secondary-action">
-      <button ng-click="remove($index)" class="mdl-button mdl-js-button mdl-js-ripple-effect">
-        <i class="material-icons">clear</i>
-      </button>
-    </span>
-  </li>
-</ul>
+<div class="row">
+  <div ng-repeat="relationship in relationships" class="row">
+    <div class="input-field col s2">
+      <select ng-model="relationship.source" class="browser-default">
+        <option value="" disabled selected>--Select--</option>
+        <option ng-repeat="person in people" value="person">{{person}}</option>
+      </select>
+    </div>
 
-<hr>
-<div ng-repeat="relationship in relationships">
-  <select ng-model="relationship.source">
-      <option ng-repeat="person in people" value="person"  ng-show="member.name !== data.rightMember">{{member.name}}</option>
-  </select>
-  &nbsp; is &nbsp;
-  <select ng-model="data.relationship">
-      <option ng-repeat="(relation, value) in relationshipCodes" value="{{relation}}">{{relation}}</option>
-  </select>
-  &nbsp;  with &nbsp;
-  <select ng-model="data.rightMember">
-      <option ng-repeat="member in group" value="{{member.name}}" ng-show="member.name !== data.leftMember">{{member.name}}</option>
-  </select>
-   <div class="mdl-cell mdl-cell--4-col">
-      <button ng-click="setRelation()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-          <i class="material-icons">+</i>
-      </button>
+    &nbsp; is &nbsp;
+
+    <div class="input-field col s2">
+      <select ng-model="relationship.relation" class="browser-default">
+        <option value="" disabled selected>--Select--</option>
+        <option ng-repeat="(relation, value) in relationshipCodes" value="{{relation}}">{{relation}}</option>
+      </select>
+    </div>
+
+    &nbsp;  with &nbsp;
+    <div class="input-field col s2">
+      <select ng-model="relationship.target" class="browser-default">
+        <option value="" disabled selected>--Select--</option>
+        <option ng-repeat="person in people" value="person">{{person}}</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div ng-repeat="relationship in relationships" class="row">
+    <div class="input-field col s2">
+      <select ng-model="relationship.source" class="browser-default">
+        <option value="" disabled selected>--Select--</option>
+        <option ng-repeat="person in people" value="person">{{person}}</option>
+      </select>
+    </div>
+
+    &nbsp; is &nbsp;
+
+    <div class="input-field col s2">
+      <select ng-model="relationship.relation" class="browser-default">
+        <option value="" disabled selected>--Select--</option>
+        <option ng-repeat="(relation, value) in relationshipCodes" value="{{relation}}">{{relation}}</option>
+      </select>
+    </div>
+
+    &nbsp;  with &nbsp;
+    <div class="input-field col s2">
+      <select ng-model="relationship.target" class="browser-default">
+        <option value="" disabled selected>--Select--</option>
+        <option ng-repeat="person in people" value="person">{{person}}</option>
+      </select>
+    </div>
   </div>
 </div>

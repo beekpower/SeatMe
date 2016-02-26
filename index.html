@@ -5,14 +5,17 @@
 
     <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
+    <!--Bower CSS-->
+    <link type="text/css" rel="stylesheet" href="bower_components/Materialize/dist/css/materialize.min.css"  media="screen,projection"/>
+
     <!--Bower Components-->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/material-design-lite/material.min.js"></script>
+    <script src="bower_components/Materialize/dist/js/materialize.min.js"></script>
     <script src="bower_components/webcola/WebCola/cola.min.js"></script>
 
-    <!--Bower CSS-->
-    <link rel="stylesheet" href="bower_components/material-design-lite/material.css">
+
 
     <!--NPM Components-->
     <script src="node_modules/genetic-js/lib/genetic.js"></script>
@@ -25,9 +28,15 @@
     <!--CSS-->
     <link rel="stylesheet" href="css/style.css">
 
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+    <script>
+
+    </script>
   </head>
 
   <body ng-app="seatMe">
@@ -146,10 +155,8 @@
 
 </script>
 
-        <div class="mdl-layout__container">
-            <div class="mdl-layout__content">
+
                 <div ng-view class=""></div>
-            </div>
-        </div>
+
   </body>
 </html>

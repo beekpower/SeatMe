@@ -70,7 +70,7 @@ angular.module('controllers', [])
 
 }).controller("geneticAlgorithm", function ($scope) {
 
-}).controller("peopleController", function ($scope) {
+}).controller("peopleController", function ($scope, Relationships, $interval) {
   $scope.people = ["Nick", "Tyler", "Zach"];
 
   $scope.relationships = [
@@ -88,6 +88,7 @@ angular.module('controllers', [])
   $scope.remove = function(index) {
     $scope.people.splice(index, 1);
   }
+
 
 
 });
