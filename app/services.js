@@ -60,13 +60,13 @@
     genetic.fitness = function(chromosome) {
       var fitness = 0;
       for (var i=0; i<chromosome.length - 1; i++) {
-               for (var person in chromosome[i].relationships) {
+        for (var person in chromosome[i].relationships) {
                  if (person == chromosome[i+1].name) {
                    fitness += chromosome[i].relationships[person];
                   break;
-                  }		            
-                }
-              }
+            }
+          }
+       }
 
           return fitness;
         }
