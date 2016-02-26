@@ -5,7 +5,8 @@ angular.module('services', [])
   var genetic;
   var pr;
 
-  this.init = function(input) {
+  this.init = function(input, isUniform) {
+    isUniform = isUniform || true;
     pr = input;
     genetic = Genetic.create();
     genetic.optimize = Genetic.Optimize.Maximize;
@@ -16,7 +17,7 @@ angular.module('services', [])
       return this.userData["data"];
     }
 
-    genetic.crossover = function(mother, father) {
+    var uniform = function(mother, father) {
       var fatherCut = [];
       var motherCut = [];
       var daughter;
@@ -37,6 +38,9 @@ angular.module('services', [])
       return [son, daughter];
     }
 
+    var otherOne = uniform;
+    genetic.crossover = (isUniform) ? uniform : otherOne;
+
     genetic.mutate = function(chromosome) {
       var first = Math.floor(Math.random() * chromosome.length);
       var second = Math.floor(Math.random() * chromosome.length);
@@ -52,10 +56,6 @@ angular.module('services', [])
 
       return chromosome;
     }
-
-    genetic.notification = function(pop, generation, stats, isFinished) {
-      console.log("NOTIFFFFFFFFFF",pop[0], generation, stats, isFinished)
-    };
 
     genetic.generation = function(pop, generation, stats) {
       // stop running once we've reached the solution
@@ -76,18 +76,26 @@ angular.module('services', [])
     }
   };
 
-  this.evolve = function() {
-    var config = {
+  this.evolve = function(config) {
+    var config = config || {
         "iterations": 200
         , "size": 250
         , "crossover": 0.3
         , "mutation": 0.3
-        , "skip": 20
+        , "skip": 10
       };
       var userData = {
       	"data": pr
       };
       genetic.evolve(config, userData);
+  }
+
+  this.notify = function (callback)
+  {
+    genetic.notification = function(pop, generation, stats, isFinished) {
+      var best = pop[0];
+      return callback(best, generation, stats, isFinished);
+    };
   }
 })
 .service("Relationships", function() {

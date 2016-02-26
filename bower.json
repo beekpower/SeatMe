@@ -4,6 +4,7 @@
     "angular": "1.4.7",
     "angular-route": "1.4.7",
     "jquery": "2.1.4",
-    "material-design-lite": "^1.1.1"
+    "material-design-lite": "^1.1.1",
+    "c3": "^0.4.10"
   }
 }

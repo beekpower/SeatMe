@@ -65,5 +65,16 @@
 
 
 <div class="row">
-  <button class="waves-effect waves-light btn" ng-click="submit()">Submit to next step</button>
+  <div class="input-field col s4">
+    Cross Over algorithm
+    <select ng-model="algorithm" class="browser-default">
+      <option value="Boolean(true)" selected>uniform</option>
+      <option value="Boolean(false)">other one</option>
+    </select>
+  </div>
+  <div class="input-field col s4">
+  <br>
+      <button class="waves-effect waves-light btn" ng-click="submit()">Submit to next step</button>
+  </div>
+ 
 </div>
