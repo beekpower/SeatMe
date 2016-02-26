@@ -15,8 +15,16 @@ angular.module('directives', [])
 
       var links = [];
 
+      function getPersonIndex(name) {
+        for (var i=0; i < scope.people.length; i++) {
+          if (name == scope.people[i]) {
+            return i;
+          }
+        }
+      }
+
       for (var i=0; i < scope.relationships.length; i++) {
-      //  nodes.push({ name: scope.people[i], width: 60, height: 40 });
+        links.push({ source: getPersonIndex(scope.relationships[i].source), target: getPersonIndex(scope.relationships[i].target) });
       }
 
       // var links = [
