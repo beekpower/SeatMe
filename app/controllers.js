@@ -1,5 +1,36 @@
 angular.module('controllers', [])
 .controller("geneticAlgorithm", function ($scope, Genetic) {
+  var chartData ={
+    keys: {
+      "mean": 0,
+      "maximum":1,
+      "minimum":2,
+      "stdev":3
+    },
+    array: [['mean'],
+      ['maximum'],
+      ["minimum"],
+      ["stdev"]
+    ]
+  } 
+    
+  var chart = c3.generate({
+    bindto: '#chart',
+    data: {
+      columns: chartData.array
+    }
+  });
+  
+  Genetic.notify(function (best, gen, stats, isFinished)
+  {
+    for(var key in stats)
+      chartData.array[chartData.keys[key]].push(stats[key]);
+    chart.load({
+      columns: chartData.array
+    })
+    
+  });
+
   Genetic.evolve();
 }).controller("peopleController", function ($scope, Genetic, Relationships) {
   $scope.relationship = { source: "", target: "", relation: ""};
@@ -10,9 +41,17 @@ angular.module('controllers', [])
     { source: "Nick", target: "Zach", relation: 2}
   ];
 
+  $scope.algorithm = true;
   $scope.relationshipCodes = Relationships.getRelationships();
   $scope.getRelationship = Relationships.getRelationship;
 
+  $scope.config = {
+        "iterations": 200
+        , "size": 250
+        , "crossover": 0.3
+        , "mutation": 0.3
+        , "skip": 10
+      };
   $scope.add = function(name) {
     $scope.name = "";
     $scope.people.push(name);
@@ -57,7 +96,7 @@ angular.module('controllers', [])
       }
     }
 
-    Genetic.init(pr);
+    Genetic.init(pr, $scope.algorithm, $scope.config);
     window.location.hash = "/generator";
   }
 });
