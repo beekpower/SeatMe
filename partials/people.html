@@ -27,21 +27,21 @@
     <div class="row">
       <div class="input-field col s4">
         <select ng-model="relationship.source" class="browser-default">
-          <option value="" disabled selected>--Select--</option>
+          <option value="" disabled selected>--Source--</option>
           <option ng-repeat="person in people" value="{{person}}" ng-show="person !== relationship.target">{{person}}</option>
         </select>
       </div>
 
       <div class="input-field col s4">
         <select ng-model="relationship.target" class="browser-default">
-          <option value="" disabled selected>--Select--</option>
+          <option value="" disabled selected>--Target--</option>
           <option ng-repeat="person in people" value="{{person}}" ng-show="person !== relationship.source">{{person}}</option>
         </select>
       </div>
 
       <div class="input-field col s4">
         <select ng-model="relationship.relation" class="browser-default">
-          <option value="" disabled selected>--Select--</option>
+          <option value="" disabled selected>--Relation--</option>
           <option ng-repeat="(relation, value) in relationshipCodes" value="{{value}}">{{relation}}</option>
         </select>
       </div>

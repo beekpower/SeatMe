@@ -14,6 +14,7 @@ angular.module('controllers', [])
   $scope.getRelationship = Relationships.getRelationship;
 
   $scope.add = function(name) {
+    $scope.name = "";
     $scope.people.push(name);
   }
 
@@ -22,6 +23,7 @@ angular.module('controllers', [])
   }
 
   $scope.addRelationship = function(relationship) {
+    relationship.relation = parseInt(relationship.relation);
     $scope.relationships.push(relationship);
     $scope.relationship = { source: "", target: "", relation: ""};
   }
