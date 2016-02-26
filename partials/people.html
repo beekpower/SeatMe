@@ -20,30 +20,28 @@
 
   <div class="col s6">
     <div class="row">
-      <div class="input-field col s2">
+      <div class="input-field col s4">
         <select ng-model="relationship.source" class="browser-default">
           <option value="" disabled selected>--Select--</option>
-          <option ng-repeat="person in people" value="{{person.name}}" ng-show="person.name !== relationship.target">{{person.name}}</option>
+          <option ng-repeat="person in people" value="{{person}}" ng-show="person !== relationship.target">{{person}}</option>
         </select>
-        &nbsp; is &nbsp;
       </div>
-      <div class="input-field col s2">
 
+      <div class="input-field col s4">
+        <select ng-model="relationship.target" class="browser-default">
+          <option value="" disabled selected>--Select--</option>
+          <option ng-repeat="person in people" value="{{person}}" ng-show="person !== relationship.source">{{person}}</option>
+        </select>
+      </div>
+
+      <div class="input-field col s4">
         <select ng-model="relationship.relation" class="browser-default">
           <option value="" disabled selected>--Select--</option>
           <option ng-repeat="(relation, value) in relationshipCodes" value="{{relation}}">{{relation}}</option>
         </select>
-        &nbsp;  with &nbsp;
-
       </div>
 
-      <div class="input-field col s2">
-        <select ng-model="relationship.target" class="browser-default">
-          <option value="" disabled selected>--Select--</option>
-          <option ng-repeat="person in people" value="{{person.name}}" ng-show="person.name !== relationship.source">{{person.name}}</option>
-        </select>
-      </div>
-      <button ng-click="setRelation(relationship)" class="waves-effect waves-light btn">Add</button>
+      <button ng-click="addRelationship(relationship)" class="waves-effect waves-light btn">Add</button>
     </div>
 
     <div class="row">
@@ -61,6 +59,6 @@
 </div>
 
 
-  <div class="row">
-    <button class="waves-effect waves-light btn" ng-click="submit()">Submit to next step</button>
-  </div>
+<div class="row">
+  <button class="waves-effect waves-light btn" ng-click="submit()">Submit to next step</button>
+</div>
