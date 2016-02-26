@@ -1,7 +1,7 @@
 angular.module('controllers', [])
 .controller("geneticAlgorithm", function ($scope, Genetic) {
   Genetic.evolve();
-}).controller("peopleController", function ($scope, Genetic, GroupMember, Relationships) {
+}).controller("peopleController", function ($scope, Genetic, Relationships) {
   $scope.people = ["Nick", "Tyler", "Zach"];
 
   $scope.relationships = [
@@ -54,7 +54,7 @@ angular.module('controllers', [])
 
     alert(JSON.stringify(pr));
 
-    Genetic.init($scope.people);
+    Genetic.init(pr);
     window.location.hash = "/generator";
   }
 });
