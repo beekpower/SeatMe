@@ -54,7 +54,7 @@
 
     genetic.generation = function(pop, generation, stats) {
 	    // stop running once we've reached the solution
-	    console.log(JSON.strinify(pop[0].entity));
+	    console.log(JSON.stringify(pop[0].entity));
     };
 
     genetic.fitness = function(chromosome) {
