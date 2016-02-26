@@ -26,7 +26,7 @@ angular.module('directives', [])
 
       function loadLinks() {
         for (var i=0; i < scope.relationships.length; i++) {
-          links.push({ source: getPersonIndex(scope.relationships[i].source), target: getPersonIndex(scope.relationships[i].target) });
+          links.push({ source: getPersonIndex(scope.relationships[i].source), target: getPersonIndex(scope.relationships[i].target), relation: scope.relationships[i].relation });
         }
       }
 
@@ -46,16 +46,39 @@ angular.module('directives', [])
 
       var node = svg.selectAll(".node");
       var link = svg.selectAll(".link");
+      var link2 = svg.selectAll(".link2");
       var label = svg.selectAll(".label")
 
       function start() {
-        link = link.data(d3cola.links());
+        links = d3cola.links();
 
+        linkData = [];
+        link2Data = [];
+
+        for (var i = 0; i < links.length; i++) {
+          if (links[i].relation == 2) {
+            linkData.push(links[i]);
+          } else {
+            link2Data.push(links[i]);
+          }
+        }
+
+
+
+        link = link.data(linkData);
 
         link.enter().append("line")
                     .attr("class", "link");
 
         link.exit().remove();
+
+
+        link2 = link2.data(link2Data);
+
+        link2.enter().append("line")
+                    .attr("class", "link2");
+
+        link2.exit().remove();
 
         node = node.data(d3cola.nodes());
 
@@ -75,6 +98,8 @@ angular.module('directives', [])
                      .attr("class", "label")
                      .text(function (d) { return d.name; })
                      .call(d3cola.drag);
+
+
         label.exit().remove();
 
         node.append("title")
@@ -89,6 +114,11 @@ angular.module('directives', [])
             .attr("y1", function (d) { return d.source.y; })
             .attr("x2", function (d) { return d.target.x; })
             .attr("y2", function (d) { return d.target.y; });
+
+            link2.attr("x1", function (d) { return d.source.x; })
+                .attr("y1", function (d) { return d.source.y; })
+                .attr("x2", function (d) { return d.target.x; })
+                .attr("y2", function (d) { return d.target.y; });
         node.attr("x", function (d) { return d.x - d.width / 2; })
             .attr("y", function (d) { return d.y - d.height / 2; });
         label.attr("x", function (d) { return d.x; })

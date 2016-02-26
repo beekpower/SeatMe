@@ -92,11 +92,11 @@ angular.module('services', [])
 })
 .service("Relationships", function() {
   var relationships = {
-        "no relation": 0,
-        "enemies": -1,
-        "besties": 2,
-        "aquantences": 1,
-        "lovers": 3
+        "-1": { type: "Enemies", color: "#ff0000" },
+        "0": { type: "No Relation", color: "#999" },
+        "1": { type: "Aquantences", color: "#777" },
+        "2": { type: "Besties", color: "#444"},
+        "3": { type: "Lovers", color: "#111" }
   };
 
   this.getRelationships = function() {
@@ -104,15 +104,7 @@ angular.module('services', [])
   }
 
   this.getRelationship = function(input) {
-    for (code in relationships) {
-      if (relationships[code] == input) {
-        return code;
-      }
-    }
-  }
-
-  this.getCode = function(input) {
-    return relationships[input];
+    return relationships[input].type;
   }
 });
 })();
