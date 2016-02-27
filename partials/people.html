@@ -64,7 +64,7 @@
         <ul class="collection with-header">
           <li class="collection-header"><span class="card-title">Relationships</span></li>
           <li ng-repeat="relationship in relationships" class="collection-item">
-            {{relationship.source}} and {{relationship.target}} are {{getRelationship(relationship.relation)}}
+            {{relationship.source}} and {{relationship.target}} are <span style="color: {{getColor(relationship.relation)}}">{{getRelationship(relationship.relation)}}</span>
             <a class="secondary-content"><i ng-click="removeRelationship($index)" class="material-icons">clear</i></a>
           </li>
         </ul>

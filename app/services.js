@@ -115,5 +115,9 @@ angular.module('services', [])
   this.getRelationship = function(input) {
     return relationships[input].type;
   }
+
+  this.getColor = function(input) {
+    return relationships[input].color;
+  }
 });
 })();

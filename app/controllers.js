@@ -12,8 +12,8 @@ angular.module('controllers', [])
       ["minimum"],
       ["stdev"]
     ]
-  } 
-    
+  }
+
   var chart = c3.generate({
     bindto: '#chart',
     data: {
@@ -84,7 +84,7 @@ angular.module('controllers', [])
 });
   document.getElementById("chartLegend").innerHTML = chart.generateLegend();
   $scope.best = Genetic.getPeople();
-  
+
   Genetic.notify(function (best, gen, stats, isFinished)
   {
     var data = [];
@@ -92,7 +92,7 @@ angular.module('controllers', [])
       data.push(stats[i]);
     chart.addData(data, gen);
     $scope.best = best.entity;
-    
+
   });
 
   Genetic.evolve();
@@ -108,6 +108,7 @@ angular.module('controllers', [])
   $scope.algorithm = true;
   $scope.relationshipCodes = Relationships.getRelationships();
   $scope.getRelationship = Relationships.getRelationship;
+  $scope.getColor = Relationships.getColor;
 
   $scope.config = {
         "iterations": 200
