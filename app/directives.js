@@ -4,7 +4,8 @@ angular.module('directives', [])
     restrict: 'E',
     scope: {
       people: '=',
-      relationships: '='
+      relationships: '=',
+      relationshipCodes: '='
     },
     link: function(scope, elem, attrs) {
       var nodes = [];
@@ -35,7 +36,7 @@ angular.module('directives', [])
       var d3cola = cola.d3adaptor()
           .nodes(nodes)
           .links(links)
-          .linkDistance(120)
+          .linkDistance(150)
           .avoidOverlaps(true)
           .on("tick", tick)
           .size([width, height]);
@@ -47,40 +48,34 @@ angular.module('directives', [])
       $(elem).find("svg").css("width", "100%")
 
       var node = svg.selectAll(".node");
-      var link = svg.selectAll(".link");
-      var link2 = svg.selectAll(".link2");
+
+
+      var link = {};
+      for (var relationCode in scope.relationshipCodes) {
+        link[relationCode] = svg.selectAll(".link");
+      }
+
       var label = svg.selectAll(".label")
 
       function start() {
         links = d3cola.links();
 
-        linkData = [];
-        link2Data = [];
-
-        for (var i = 0; i < links.length; i++) {
-          if (links[i].relation == 2) {
-            linkData.push(links[i]);
-          } else {
-            link2Data.push(links[i]);
-          }
+        var linkData = {};
+        for (var relationCode in scope.relationshipCodes) {
+          linkData[relationCode] = [];
         }
 
+        for (var i = 0; i < links.length; i++) {
+          linkData[links[i].relation].push(links[i]);
+        }
 
-
-        link = link.data(linkData);
-
-        link.enter().append("line")
-                    .attr("class", "link");
-
-        link.exit().remove();
-
-
-        link2 = link2.data(link2Data);
-
-        link2.enter().append("line")
-                    .attr("class", "link2");
-
-        link2.exit().remove();
+        for (var relationCode in scope.relationshipCodes) {
+          link[relationCode] = link[relationCode].data(linkData[relationCode]);
+          link[relationCode].enter().append("line")
+                      .attr("class", "link")
+                      .style("stroke", scope.relationshipCodes[relationCode].color);
+          link[relationCode].exit().remove();
+        }
 
         node = node.data(d3cola.nodes());
 
@@ -112,15 +107,13 @@ angular.module('directives', [])
 
       function tick() {
 
-        link.attr("x1", function (d) { return d.source.x; })
-            .attr("y1", function (d) { return d.source.y; })
-            .attr("x2", function (d) { return d.target.x; })
-            .attr("y2", function (d) { return d.target.y; });
+        for (var relationCode in scope.relationshipCodes) {
+          link[relationCode].attr("x1", function (d) { return d.source.x; })
+                            .attr("y1", function (d) { return d.source.y; })
+                            .attr("x2", function (d) { return d.target.x; })
+                            .attr("y2", function (d) { return d.target.y; });
+        }
 
-            link2.attr("x1", function (d) { return d.source.x; })
-                .attr("y1", function (d) { return d.source.y; })
-                .attr("x2", function (d) { return d.target.x; })
-                .attr("y2", function (d) { return d.target.y; });
         node.attr("x", function (d) { return d.x - d.width / 2; })
             .attr("y", function (d) { return d.y - d.height / 2; });
         label.attr("x", function (d) { return d.x; })

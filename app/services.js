@@ -10,7 +10,7 @@ angular.module('services', [])
   {
     return pr;
   };
-  
+
   this.init = function(input, isUniform, conf) {
     config = conf;
     isUniform = isUniform || true;
@@ -101,10 +101,11 @@ angular.module('services', [])
 })
 .service("Relationships", function() {
   var relationships = {
-        "-1": { type: "Enemies", color: "#ff0000" },
-        "1": { type: "Aquantences", color: "#777" },
-        "2": { type: "Besties", color: "#444"},
-        "3": { type: "Lovers", color: "#111" }
+        "-1": { type: "Enemies", color: "red" },
+        "1": { type: "Aquantences", color: "yellow" },
+        "2": { type: "Friends", color: "blue" },
+        "3": { type: "Besties", color: "green"},
+        "4": { type: "Lovers", color: "pink" }
   };
 
   this.getRelationships = function() {

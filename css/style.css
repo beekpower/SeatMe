@@ -4,16 +4,12 @@
   stroke-width: 1.5px;
     cursor: move;
 }
+
 .link {
-  stroke: #999;
   stroke-width: 3px;
   stroke-opacity: 1;
 }
-.link2 {
-  stroke: red;
-  stroke-width: 3px;
-  stroke-opacity: 1;
-}
+
 .label {
     fill: white;
     font-family: Verdana;
