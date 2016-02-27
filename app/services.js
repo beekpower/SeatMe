@@ -79,7 +79,7 @@ angular.module('services', [])
   };
 
   this.evolve = function() {
-    
+
       var userData = {
       	"data": pr
       };
@@ -97,7 +97,6 @@ angular.module('services', [])
 .service("Relationships", function() {
   var relationships = {
         "-1": { type: "Enemies", color: "#ff0000" },
-        "0": { type: "No Relation", color: "#999" },
         "1": { type: "Aquantences", color: "#777" },
         "2": { type: "Besties", color: "#444"},
         "3": { type: "Lovers", color: "#111" }
