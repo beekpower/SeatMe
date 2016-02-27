@@ -92,6 +92,7 @@ angular.module('controllers', [])
       data.push(stats[i]);
     chart.addData(data, gen);
     $scope.best = best.entity;
+    $scope.$apply();
 
   });
 

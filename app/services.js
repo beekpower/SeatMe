@@ -118,7 +118,6 @@ angular.module('services', [])
   {
     genetic.notification = function(pop, generation, stats, isFinished) {
       var best = pop[0];
-      $scope.$apply();
       return callback(best, generation, stats, isFinished);
     };
   }
