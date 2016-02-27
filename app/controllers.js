@@ -99,13 +99,13 @@ angular.module('controllers', [])
 }).controller("peopleController", function ($scope, Genetic, Relationships) {
   $scope.relationship = { source: "", target: "", relation: ""};
   $scope.people = ["Nick", "Tyler", "Zach"];
+  $scope.algorithm = 0;
 
   $scope.relationships = [
     { source: "Nick", target: "Tyler", relation: 2},
     { source: "Nick", target: "Zach", relation: 2}
   ];
 
-  $scope.algorithm = true;
   $scope.relationshipCodes = Relationships.getRelationships();
   $scope.getRelationship = Relationships.getRelationship;
   $scope.getColor = Relationships.getColor;

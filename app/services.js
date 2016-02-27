@@ -11,9 +11,8 @@ angular.module('services', [])
     return pr;
   };
 
-  this.init = function(input, isUniform, conf) {
+  this.init = function(input, algorithm, conf) {
     config = conf;
-    isUniform = isUniform || true;
     pr = input;
     genetic = Genetic.create();
     genetic.optimize = Genetic.Optimize.Maximize;
@@ -24,12 +23,12 @@ angular.module('services', [])
       return this.userData["data"];
     }
 
-    var uniform = function(mother, father) {
+    var singlePoint = function(mother, father) {
       var fatherCut = [];
       var motherCut = [];
       var daughter;
       var son;
-      var index = mother.length / 2;
+      var index = (Math.random() * (mother.length - 1)) + 1;
       index = parseInt(index);
       motherCut = mother.splice(index, mother.length - index + 1);
       for (var i=0; i < motherCut.length; i++) {
@@ -45,8 +44,34 @@ angular.module('services', [])
       return [son, daughter];
     }
 
-    var otherOne = uniform;
-    genetic.crossover = (isUniform) ? uniform : otherOne;
+    var uniform = function(mother, father) {
+      var son = [];
+      var daughter = [];
+
+      while (father.length > 0) {
+        var slicePoint = (Math.random() * (father.length - 1)) + 1;
+        var slicedGenes = father.splice(0, slicePoint);
+
+        daughter = slicedGenes.concat(daughter);
+
+        for (var i=0; i < slicedGenes.length; i++) {
+          for (var j=0; j < mother.length; j++) {
+            if (mother[j].name == slicedGenes[i].name) {
+              son = son.concat(mother.splice(j, 1));
+            }
+          }
+        }
+      }
+      return [son, daughter];
+    }
+
+    if (algorithm == 0) {
+      genetic.crossover = singlePoint;
+      alert("single");
+    } else {
+      genetic.crossover = uniform;
+      alert("uniform");
+    }
 
     genetic.mutate = function(chromosome) {
       var first = Math.floor(Math.random() * chromosome.length);
@@ -95,6 +120,7 @@ angular.module('services', [])
   {
     genetic.notification = function(pop, generation, stats, isFinished) {
       var best = pop[0];
+      $scope.$apply();
       return callback(best, generation, stats, isFinished);
     };
   }
