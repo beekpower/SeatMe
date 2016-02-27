@@ -102,10 +102,10 @@ angular.module('services', [])
 .service("Relationships", function() {
   var relationships = {
         "-1": { type: "Enemies", color: "red" },
-        "1": { type: "Aquantences", color: "yellow" },
+        "1": { type: "Aquantences", color: "#ffe366" },
         "2": { type: "Friends", color: "blue" },
         "3": { type: "Besties", color: "green"},
-        "4": { type: "Lovers", color: "pink" }
+        "4": { type: "Lovers", color: "#ff00c8" }
   };
 
   this.getRelationships = function() {
