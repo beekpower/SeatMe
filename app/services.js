@@ -67,10 +67,8 @@ angular.module('services', [])
 
     if (algorithm == 0) {
       genetic.crossover = singlePoint;
-      alert("single");
     } else {
       genetic.crossover = uniform;
-      alert("uniform");
     }
 
     genetic.mutate = function(chromosome) {
