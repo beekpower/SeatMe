@@ -131,6 +131,7 @@ angular.module('directives', [])
       scope.$watch('people.length + relationships.length', function() {
         links.splice(0, links.length);
         nodes.splice(0, nodes.length);
+        start();
         loadNodes();
         loadLinks();
         start();
