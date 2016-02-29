@@ -36,7 +36,7 @@ angular.module('services', [])
               if (i < chromosome.length -2 && chromosome[i+2].name == person)
                  fitness += chromosome[i].relationships[person];
              if (i > 1 && chromosome[i-2] == person)
-                fitness += chromosome[i].relationships[person]; 
+                fitness += chromosome[i].relationships[person];
            }
         }
         return fitness;
@@ -54,9 +54,7 @@ angular.module('services', [])
       }
       return fitness;
     }
-  };
 
-  genetic.fitness = (fitnessAlg == 0) ? fitnessOne : fitnessTwo;
     var singlePoint = function(mother, father) {
       var fatherCut = [];
       var motherCut = [];
@@ -105,6 +103,12 @@ angular.module('services', [])
       genetic.crossover = uniform;
     }
 
+    if (fitnessAlg == 0) {
+      genetic.fitness = fitnessOne;
+    } else {
+      genetic.fitness = fitnessTwo;
+    }
+
     genetic.mutate = function(chromosome) {
       var first = Math.floor(Math.random() * chromosome.length);
       var second = Math.floor(Math.random() * chromosome.length);
@@ -125,6 +129,16 @@ angular.module('services', [])
       // stop running once we've reached the solution
       return true;
     };
+
+
+
+
+
+
+  };
+
+
+
 
 
   this.evolve = function() {
