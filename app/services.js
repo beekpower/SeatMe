@@ -11,7 +11,7 @@ angular.module('services', [])
     return pr;
   };
 
-  this.init = function(input, algorithm, conf) {
+  this.init = function(input, algorithm, conf, fitnessAlg) {
     config = conf;
     pr = input;
     genetic = Genetic.create();
@@ -92,7 +92,26 @@ angular.module('services', [])
       return true;
     };
 
-    genetic.fitness = function(chromosome) {
+    var fitnessTwo = function (chromosome)
+    {
+        var fitness = 0;
+        for (var i=0; i < chromosome.length -1; i++)
+        {
+           for (var person in chromosome[i].relationships)
+           {
+              if (person == chromosome[i+1].name) {
+                fitness += chromosome[i].relationships[person] * 2;
+              }
+              if (i < chromosome.length -2 && chromosome[i+2].name == person)
+                 fitness += chromosome[i].relationships[person];
+             if (i > 1 && chromosome[i-2] == person)
+                fitness += chromosome[i].relationships[person]; 
+           }
+        }
+        return fitness;
+    };
+
+    var fitnessOne = function(chromosome) {
       var fitness = 0;
       for (var i=0; i<chromosome.length - 1; i++) {
         for (var person in chromosome[i].relationships) {
@@ -105,6 +124,8 @@ angular.module('services', [])
       return fitness;
     }
   };
+
+  genetic.fitness = (fitnessAlg == 0) ? fitnessOne : fitnessTwo;
 
   this.evolve = function() {
 

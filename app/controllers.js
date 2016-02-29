@@ -1,25 +1,5 @@
 angular.module('controllers', [])
 .controller("geneticAlgorithm", function ($scope, Genetic) {
-  /*var chartData ={
-    keys: {
-      "mean": 0,
-      "maximum":1,
-      "minimum":2,
-      "stdev":3
-    },
-    array: [['mean'],
-      ['maximum'],
-      ["minimum"],
-      ["stdev"]
-    ]
-  }
-
-  var chart = c3.generate({
-    bindto: '#chart',
-    data: {
-      columns: chartData.array
-    }
-  });*/
 
   var chartData = {
     labels: [0],
@@ -99,12 +79,33 @@ angular.module('controllers', [])
   Genetic.evolve();
 }).controller("peopleController", function ($scope, Genetic, Relationships) {
   $scope.relationship = { source: "", target: "", relation: ""};
-  $scope.people = ["Nick", "Tyler", "Zach"];
+  $scope.people = ["Nick", "Tyler", "Zach", "Prof Valova", "Joe", "Jill", "Liz", "Arnold", "James",
+    "Monkey", "Bradley", "Ian", "Olivia", "Ashley"];
   $scope.algorithm = 0;
 
   $scope.relationships = [
     { source: "Nick", target: "Tyler", relation: 2},
-    { source: "Nick", target: "Zach", relation: 2}
+    { source: "Nick", target: "Zach", relation: 2},
+    { source: "Nick", target: "Arnold", relation: 1},
+    { source: "Tyler", target: "Zach", relation: 1},
+    { source: "Ian",  target: "Liz", relation: 4},
+    { source: "Ian", target: "Ashley", relation: 2},
+    { source: "Prof Valova", target: "Tyler", relation: 4},
+    { source: "Olivia", target: "Ashley", relation: 3},
+    { source: "Zach", target: "Ashley", relation: 3},
+    { source: "Zach", target: "James", relation: -1},
+    { source: "Bradley", target: "Monkey", relation: 3},
+    { source: "Tyler" , target: "Bradley", relation: 3},
+    { source: "Tyler", target: "Monkey", relation: -1},
+    { source: "Jill", target: "Olivia", relation: 3},
+    { source: "Nick", target: "Prof Valova", relation: -1},
+    { source: "Ashley", target: "Jill", relation: -1},
+    { source: "Monkey", target: "Arnold", relation: 1},
+    { source: "Olivia", target: "Joe", relation: 1},
+    {source:"Monkey", target: "Ian", relation: -1},
+    { source: "Bradley", target: "Jill", relation: 4},
+    {source: "Olivia", target: "Prof Valova", relation: 3},
+    {source: "Prof Valova", target: "Monkey", relation: -1}
   ];
 
   $scope.relationshipCodes = Relationships.getRelationships();
