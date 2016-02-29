@@ -82,7 +82,8 @@ angular.module('controllers', [])
   $scope.people = ["Nick", "Tyler", "Zach", "Prof Valova", "Joe", "Jill", "Liz", "Arnold", "James",
     "Monkey", "Bradley", "Ian", "Olivia", "Ashley"];
   $scope.algorithm = 0;
-
+  $scope.fitnessAlg = 0;
+  
   $scope.relationships = [
     { source: "Nick", target: "Tyler", relation: 2},
     { source: "Nick", target: "Zach", relation: 2},
@@ -163,7 +164,7 @@ angular.module('controllers', [])
       }
     }
 
-    Genetic.init(pr, $scope.algorithm, $scope.config);
+    Genetic.init(pr, $scope.algorithm, $scope.config, $scope.fitnessAlg);
     window.location.hash = "/generator";
   }
 });
