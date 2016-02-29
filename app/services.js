@@ -33,10 +33,13 @@ angular.module('services', [])
               if (person == chromosome[i+1].name) {
                 fitness += chromosome[i].relationships[person] * 2;
               }
-              if (i < chromosome.length -2 && chromosome[i+2].name == person)
-                 fitness += chromosome[i].relationships[person];
-             if (i > 1 && chromosome[i-2] == person)
-                fitness += chromosome[i].relationships[person];
+
+              if (i < chromosome.length -2){
+                if (person == chromosome[i+2].name) {
+                  fitness += chromosome[i].relationships[person];
+                }
+              }
+
            }
         }
         return fitness;
