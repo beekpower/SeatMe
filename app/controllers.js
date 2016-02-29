@@ -79,7 +79,7 @@ angular.module('controllers', [])
   Genetic.evolve();
 }).controller("peopleController", function ($scope, Genetic, Relationships) {
   $scope.relationship = { source: "", target: "", relation: ""};
-  $scope.people = ["Nick", "Tyler", "Zach", "Prof Valova", "Joe", "Jill", "Liz", "Arnold", "James",
+  $scope.people = ["Nick", "Tyler", "Zach", "Prof Valova", "Joe", "Jill", "Liz", "Arnold", "Gerald",
     "Monkey", "Bradley", "Ian", "Olivia", "Ashley"];
   $scope.algorithm = 0;
   $scope.fitnessAlg = 0;
@@ -94,7 +94,7 @@ angular.module('controllers', [])
     { source: "Prof Valova", target: "Tyler", relation: 4},
     { source: "Olivia", target: "Ashley", relation: 3},
     { source: "Zach", target: "Ashley", relation: 3},
-    { source: "Zach", target: "James", relation: -1},
+    { source: "Zach", target: "Gerald", relation: -1},
     { source: "Bradley", target: "Monkey", relation: 3},
     { source: "Tyler" , target: "Bradley", relation: 3},
     { source: "Tyler", target: "Monkey", relation: -1},

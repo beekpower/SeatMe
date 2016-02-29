@@ -12,7 +12,8 @@ angular.module('services', [])
   };
 
   this.init = function(input, algorithm, conf, fitnessAlg) {
-    config = conf;
+    console.log(fitnessAlg);
+      config = conf;
     pr = input;
     genetic = Genetic.create();
     genetic.optimize = Genetic.Optimize.Maximize;
