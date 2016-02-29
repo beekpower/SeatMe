@@ -34,10 +34,8 @@ angular.module('services', [])
                 fitness += chromosome[i].relationships[person] * 2;
               }
 
-              if (i < chromosome.length -2){
-                if (person == chromosome[i+2].name) {
-                  fitness += chromosome[i].relationships[person];
-                }
+              if (i < chromosome.length -2 && person == chromosome[i+2].name) {
+                fitness += chromosome[i].relationships[person];
               }
 
            }
