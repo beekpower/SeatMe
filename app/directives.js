@@ -31,7 +31,7 @@ angular.module('directives', [])
         }
       }
 
-      var width = 960, height = 500;
+      var width = 960, height = 800;
       var color = d3.scale.category20();
       var d3cola = cola.d3adaptor()
           .nodes(nodes)
