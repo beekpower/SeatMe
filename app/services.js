@@ -23,6 +23,40 @@ angular.module('services', [])
       return this.userData["data"];
     }
 
+    var fitnessTwo = function (chromosome)
+    {
+        var fitness = 0;
+        for (var i=0; i < chromosome.length -1; i++)
+        {
+           for (var person in chromosome[i].relationships)
+           {
+              if (person == chromosome[i+1].name) {
+                fitness += chromosome[i].relationships[person] * 2;
+              }
+              if (i < chromosome.length -2 && chromosome[i+2].name == person)
+                 fitness += chromosome[i].relationships[person];
+             if (i > 1 && chromosome[i-2] == person)
+                fitness += chromosome[i].relationships[person]; 
+           }
+        }
+        return fitness;
+    };
+
+    var fitnessOne = function(chromosome) {
+      var fitness = 0;
+      for (var i=0; i<chromosome.length - 1; i++) {
+        for (var person in chromosome[i].relationships) {
+          if (person == chromosome[i+1].name) {
+            fitness += chromosome[i].relationships[person];
+            break;
+          }
+        }
+      }
+      return fitness;
+    }
+  };
+
+  genetic.fitness = (fitnessAlg == 0) ? fitnessOne : fitnessTwo;
     var singlePoint = function(mother, father) {
       var fatherCut = [];
       var motherCut = [];
@@ -92,40 +126,6 @@ angular.module('services', [])
       return true;
     };
 
-    var fitnessTwo = function (chromosome)
-    {
-        var fitness = 0;
-        for (var i=0; i < chromosome.length -1; i++)
-        {
-           for (var person in chromosome[i].relationships)
-           {
-              if (person == chromosome[i+1].name) {
-                fitness += chromosome[i].relationships[person] * 2;
-              }
-              if (i < chromosome.length -2 && chromosome[i+2].name == person)
-                 fitness += chromosome[i].relationships[person];
-             if (i > 1 && chromosome[i-2] == person)
-                fitness += chromosome[i].relationships[person]; 
-           }
-        }
-        return fitness;
-    };
-
-    var fitnessOne = function(chromosome) {
-      var fitness = 0;
-      for (var i=0; i<chromosome.length - 1; i++) {
-        for (var person in chromosome[i].relationships) {
-          if (person == chromosome[i+1].name) {
-            fitness += chromosome[i].relationships[person];
-            break;
-          }
-        }
-      }
-      return fitness;
-    }
-  };
-
-  genetic.fitness = (fitnessAlg == 0) ? fitnessOne : fitnessTwo;
 
   this.evolve = function() {
 
