@@ -98,6 +98,15 @@
   <input ng-model="config.skip" value="10" />
   </div>
   <div class="input-field col s4">
+    Fitness Algorithm
+    <select ng-model="fitnessAlg" class="browser-default">
+      <option value="0" selected="selected">1 Person</option>
+      <option value="1">2 Person</option>
+    </select>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s4">
     Cross Over algorithm
     <select ng-model="algorithm" class="browser-default">
       <option value="0" selected="selected">Single Point</option>
