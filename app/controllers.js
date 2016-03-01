@@ -52,7 +52,7 @@ angular.module('controllers', [])
 };
 
   var ctx = document.getElementById("chart").getContext("2d");
-  var chart = new Chart(ctx).Line(chartData,{responsive: true,  datasetFill : false,
+  var chart = new Chart(ctx).Line(chartData,{responsive: true,  datasetFill : false, animation: false,
       legendTemplate : '<ul>'
                   +'<% for (var i=0; i<datasets.length; i++) { %>'
                     +'<li>'
@@ -83,7 +83,7 @@ angular.module('controllers', [])
     "Monkey", "Bradley", "Ian", "Olivia", "Ashley"];
   $scope.algorithm = 0;
   $scope.fitnessAlg = 0;
-  
+
   $scope.relationships = [
     { source: "Nick", target: "Tyler", relation: 2},
     { source: "Nick", target: "Zach", relation: 2},
