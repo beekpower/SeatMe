@@ -24,6 +24,7 @@ angular.module('services', [])
       return this.userData["data"];
     }
 
+    //Fitness based on two people to the right
     var fitnessTwo = function (chromosome)
     {
         var fitness = 0;
@@ -44,6 +45,7 @@ angular.module('services', [])
         return fitness;
     };
 
+    //Fitness based on person to right
     var fitnessOne = function(chromosome) {
       var fitness = 0;
       for (var i=0; i<chromosome.length - 1; i++) {
@@ -57,6 +59,7 @@ angular.module('services', [])
       return fitness;
     }
 
+    //Single point crossover
     var singlePoint = function(mother, father) {
       var fatherCut = [];
       var motherCut = [];
@@ -78,6 +81,7 @@ angular.module('services', [])
       return [son, daughter];
     }
 
+    //Uniform crossover
     var uniform = function(mother, father) {
       var son = [];
       var daughter = [];
@@ -111,6 +115,7 @@ angular.module('services', [])
       genetic.fitness = fitnessTwo;
     }
 
+    //Mutate the chromosome
     genetic.mutate = function(chromosome) {
       var first = Math.floor(Math.random() * chromosome.length);
       var second = Math.floor(Math.random() * chromosome.length);
@@ -131,18 +136,9 @@ angular.module('services', [])
       // stop running once we've reached the solution
       return true;
     };
-
-
-
-
-
-
   };
 
-
-
-
-
+  //Evolve the fitness function
   this.evolve = function() {
 
       var userData = {
@@ -151,6 +147,7 @@ angular.module('services', [])
       genetic.evolve(config, userData);
   }
 
+  //Return what has been found so far
   this.notify = function (callback)
   {
     genetic.notification = function(pop, generation, stats, isFinished) {
