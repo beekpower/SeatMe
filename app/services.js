@@ -74,7 +74,7 @@ angular.module('services', [])
             fatherCut = fatherCut.concat(father.splice(j, 1));
           }
         }
-        daughter = fatherCut.concat(mother);
+        daughter = mother.concat(fatherCut);
         son = father.concat(motherCut);
       }
 
